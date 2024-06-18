@@ -1,0 +1,30 @@
+spring:
+  application:
+    name: jpaExample
+  config:
+    activate:
+      on-profile: default
+  main:
+    allow-been-definition-overriding: true
+  h2-datasource:
+    jdbc-url: jdbc:h2:mem:test;MODE=MYSQL
+    username: username
+    password: password
+  pg-datasource:
+    jdbc-url: jdbc:postgresql://localhost:5432/test
+    username: username
+    password: password
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+
+
+logging:
+  config: "classpath:log4j2-spring.xml"
+  logLevel: ${LOG_LEVEL:debug}
+  path: ${LOGGING_PATH:logs}
+  filename: ${LOGGING_FILENAME:fo-ac-search-api}
+  maxHistory: ${LOGGING_MAX_HISTORY:100} # ?? ? ?? ?? ??
+  sizeCap: ${LOGGING_SIZE_CAP:50MB}
+  intervalCap: ${LOGGING_INTERVAL_CAP:1}

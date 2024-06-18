@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration debug="true">
+    <!-- log 변수 값 설정 -->
+    <properties>
+        <property name="LOG_PREFIX">${spring:spring.application.name}</property>
+        <property name="LOG_PATH">${spring:logging.path}</property>
+        <property name="LOG_LEVEL">${spring:logging.logLevel}</property>
+        <property name="LOG_FILE_NAME">${spring:logging.filename}</property>
+        <property name="LOG_MAX_HISTORY">${spring:logging.maxHistory}</property>
+        <property name="LOG_SIZE_CAP">${spring:logging.sizeCap}</property>
+        <property name="LOG_INTERVAL_CAP">${spring:logging.intervalCap}</property>
+        <property name="DEFAULT_PATTERN"
+                  value="[${LOG_PREFIX}] %d{yyyy-MM-dd HH:mm:ss} [%thread] [%-5level] %logger{36} - %msg%n"/>
+        <property name="COLOR_PATTERN"
+                  value="[${LOG_PREFIX}] %d{yyyy-MM-dd HH:mm:ss} [%thread] [%highlight{%-5level}] %logger{36} - %msg%n" />
+    </properties>
+
+    <!-- Appender 설정 -->
+    <Appenders>
+        <!-- Console log Appender -->
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout charset="UTF-8" pattern="${COLOR_PATTERN}" />
+        </Console>
+
+        <!-- Rolling File Appender -->
+        <RollingFile name ="File">
+            <FileName>${LOG_PATH}/${LOG_FILE_NAME}.log</FileName>
+            <FilePattern>${LOG_PATH}/archive/${LOG_FILE_NAME}.%d{yyyy-MM-dd-hh-mm}.log</FilePattern>
+            <PatternLayout charset="UTF-8" pattern="${DEFAULT_PATTERN}" />
+            <Policies>
+                <SizeBasedTriggeringPolicy size="${LOG_SIZE_CAP}"/>
+                <TimeBasedTriggeringPolicy interval="${LOG_INTERVAL_CAP}" modulate="true" />
+            </Policies>
+            <DefaultRolloverStrategy>
+                <Delete basePath="${LOG_PATH}/archive" maxDepth="1">
+                    <IfAccumulatedFileCount exceeds="${LOG_MAX_HISTORY}"/>
+                </Delete>
+            </DefaultRolloverStrategy>
+        </RollingFile>
+    </Appenders>
+
+    <!-- Logger 설정 -->
+    <Loggers>
+        <!-- 운영 환경 -->
+        <SpringProfile name="prod">
+            <logger name="org.springframework" level="${LOG_LEVEL}" additivity="false" >
+                <AppenderRef ref="File"/>
+            </logger>
+            <logger name="org.apache.ibatis" level="INFO" additivity="false">
+                <AppenderRef ref="File"/>
+            </logger>
+            <logger name="org.thymeleaf" level="INFO" additivity="false" >
+                <AppenderRef ref="File"/>
+            </logger>
+            <logger name="org.apache" level="INFO" additivity="false" >
+                <AppenderRef ref="File"/>
+            </logger>
+            <logger name="com.amazonaws.util" level="INFO" additivity="false" >
+                <AppenderRef ref="File"/>
+            </logger>
+            <logger name="kyobobook" level="${LOG_LEVEL}" additivity="false">
+                <AppenderRef ref="File"/>
+            </logger>
+            <logger name="org.mongodb.driver" level="INFO" additivity="false">
+                <AppenderRef ref="File"/>
+            </logger>
+            <logger name="org.apache.kafka" level="INFO" additivity="false">
+                <AppenderRef ref="File"/>
+            </logger>
+            <logger name="org.springframework.kafka" level="INFO" additivity="false">
+                <AppenderRef ref="File"/>
+            </logger>
+
+            <!-- Log4jdbc 옵션 설정 -->
+            <logger name="jdbc" level="OFF"/>
+            <!-- SQL문 만을 로그로 남긴다, PreparedStatement일 경우 관련된 argument 값으로 대체된 값으로 SQL 문이 보여진다. -->
+            <logger name="jdbc.sqlonly" level="OFF"/>
+            <!-- SQL문과 해당 SQL을 싱행시키는데 수행된 시간정보(millseconds)를 포함한다 -->
+            <logger name="jdbc.sqltiming" level="OFF"/>
+            <!-- ResultSet 을 제외한 모든 JDBC 호출 정보를 로그로 남김, 방대한 양의 로그가 쌓임
+                 JDBC 문제를 추적해야 할 필요가 있는 경우를 제외하고 사용을 권장하지 않음 -->
+            <logger name="jdbc.audit" level="OFF"/>
+            <!-- ResultSet을 포함한 모든 JDBC 호출 정보를 로그에 남김, 방대한 양의 로그가 쌓임 -->
+            <logger name="jdbc.resultset" level="OFF"/>
+            <!-- SQL 조회된 데이터를 TABLE 로그로 남긴다. -->
+            <logger name="jdbc.resultsettable" level="OFF"/>
+            <!-- 커넥션 open, close 이벤트 로그를 남긴다. -->
+            <logger name="jdbc.connection" level="OFF"/>
+        </SpringProfile>
+
+        <!-- 개발 환경 -->
+        <SpringProfile name="dev">
+            <logger name="org.springframework" level="${LOG_LEVEL}" additivity="false" >
+                <AppenderRef ref="Console"/>
+                <AppenderRef ref="File"/>
+            </logger>
+            <logger name="org.apache.ibatis" level="INFO" additivity="false">
+                <AppenderRef ref="Console"/>
+                <AppenderRef ref="File"/>
+            </logger>
+            <logger name="org.thymeleaf" level="INFO" additivity="false" >
+                <AppenderRef ref="Console"/>
+                <AppenderRef ref="File"/>
+            </logger>
+            <logger name="org.apache" level="INFO" additivity="false" >
+                <AppenderRef ref="Console"/>
+                <AppenderRef ref="File"/>
+            </logger>
+            <logger name="com.amazonaws.util" level="INFO" additivity="false" >
+                <AppenderRef ref="Console"/>
+                <AppenderRef ref="File"/>
+            </logger>
+            <logger name="kyobobook" level="${LOG_LEVEL}" additivity="false">
+                <AppenderRef ref="Console"/>
+                <AppenderRef ref="File"/>
+            </logger>
+            <logger name="org.mongodb.driver" level="INFO" additivity="false">
+                <appenderRef ref="Console"/>
+                <AppenderRef ref="File"/>
+            </logger>
+            <logger name="org.apache.kafka" level="INFO" additivity="false">
+                <appenderRef ref="Console"/>
+                <AppenderRef ref="File"/>
+            </logger>
+            <logger name="org.springframework.kafka" level="INFO" additivity="false">
+                <appenderRef ref="Console"/>
+                <AppenderRef ref="File"/>
+            </logger>
+
+            <!-- Log4jdbc 옵션 설정 -->
+            <logger name="jdbc" level="OFF"/>
+            <!-- SQL문 만을 로그로 남긴다, PreparedStatement일 경우 관련된 argument 값으로 대체된 값으로 SQL 문이 보여진다. -->
+            <logger name="jdbc.sqlonly" level="OFF"/>
+            <!-- SQL문과 해당 SQL을 싱행시키는데 수행된 시간정보(millseconds)를 포함한다 -->
+            <logger name="jdbc.sqltiming" level="OFF"/>
+            <!-- ResultSet 을 제외한 모든 JDBC 호출 정보를 로그로 남김, 방대한 양의 로그가 쌓임
+                 JDBC 문제를 추적해야 할 필요가 있는 경우를 제외하고 사용을 권장하지 않음 -->
+            <logger name="jdbc.audit" level="OFF"/>
+            <!-- ResultSet을 포함한 모든 JDBC 호출 정보를 로그에 남김, 방대한 양의 로그가 쌓임 -->
+            <logger name="jdbc.resultset" level="OFF"/>
+            <!-- SQL 조회된 데이터를 TABLE 로그로 남긴다. -->
+            <logger name="jdbc.resultsettable" level="OFF"/>
+            <!-- 커넥션 open, close 이벤트 로그를 남긴다. -->
+            <logger name="jdbc.connection" level="OFF"/>
+        </SpringProfile>
+
+        <!-- 로컬 환경 -->
+        <SpringProfile name="local">
+            <logger name="org.springframework" level="${LOG_LEVEL}" additivity="false">
+                <appenderRef ref="Console"/>
+                <AppenderRef ref="File"/>
+            </logger>
+            <logger name="org.apache.ibatis" level="${LOG_LEVEL}" additivity="false" >
+                <appenderRef ref="Console"/>
+                <AppenderRef ref="File"/>
+            </logger>
+            <logger name="org.thymeleaf" level="${LOG_LEVEL}" additivity="false" >
+                <appenderRef ref="Console"/>
+                <AppenderRef ref="File"/>
+            </logger>
+            <logger name="org.apache" level="INFO" additivity="false" >
+                <appenderRef ref="Console"/>
+                <AppenderRef ref="File"/>
+            </logger>
+            <logger name="org.apache.http.wire" level="${LOG_LEVEL}" additivity="false" >
+                <appenderRef ref="Console"/>
+                <AppenderRef ref="File"/>
+            </logger>
+            <logger name="com.amazonaws.util" level="${LOG_LEVEL}" additivity="false" >
+                <appenderRef ref="Console"/>
+                <AppenderRef ref="File"/>
+            </logger>
+            <logger name="kyobobook" level="${LOG_LEVEL}" additivity="false" >
+                <appenderRef ref="Console"/>
+                <AppenderRef ref="File"/>
+            </logger>
+            <logger name="org.mongodb.driver" level="${LOG_LEVEL}" additivity="false" >
+                <appenderRef ref="Console"/>
+                <AppenderRef ref="File"/>
+            </logger>
+            <logger name="org.apache.kafka" level="${LOG_LEVEL}" additivity="false" >
+                <appenderRef ref="Console"/>
+                <AppenderRef ref="File"/>
+            </logger>
+            <logger name="org.springframework.kafka" level="${LOG_LEVEL}" additivity="false" >
+                <appenderRef ref="Console"/>
+                <AppenderRef ref="File"/>
+            </logger>
+
+            <!-- Log4jdbc 옵션 설정 -->
+            <logger name="jdbc" level="OFF"/>
+            <!-- SQL문 만을 로그로 남긴다, PreparedStatement일 경우 관련된 argument 값으로 대체된 값으로 SQL 문이 보여진다. -->
+            <logger name="jdbc.sqlonly" level="OFF"/>
+            <!-- SQL문과 해당 SQL을 싱행시키는데 수행된 시간정보(millseconds)를 포함한다 -->
+            <logger name="jdbc.sqltiming" level="${LOG_LEVEL}"/>
+            <!-- ResultSet 을 제외한 모든 JDBC 호출 정보를 로그로 남김, 방대한 양의 로그가 쌓임
+                 JDBC 문제를 추적해야 할 필요가 있는 경우를 제외하고 사용을 권장하지 않음 -->
+            <logger name="jdbc.audit" level="OFF"/>
+            <!-- ResultSet을 포함한 모든 JDBC 호출 정보를 로그에 남김, 방대한 양의 로그가 쌓임 -->
+            <logger name="jdbc.resultset" level="OFF"/>
+            <!-- SQL 조회된 데이터를 TABLE 로그로 남긴다. -->
+            <logger name="jdbc.resultsettable" level="${LOG_LEVEL}"/>
+            <!-- 커넥션 open, close 이벤트 로그를 남긴다. -->
+            <logger name="jdbc.connection" level="${LOG_LEVEL}"/>
+        </SpringProfile>
+
+        <!-- Root : 일반적인 로그 정책(필수) -->
+        <Root level="${LOG_LEVEL}" additivity="false">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="File"/>
+        </Root>
+    </Loggers>
+</configuration>
