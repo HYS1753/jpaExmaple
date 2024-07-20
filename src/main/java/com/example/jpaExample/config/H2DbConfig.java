@@ -63,7 +63,7 @@ public class H2DbConfig {
         em.setJpaVendorAdapter(vendorAdapter);
 
         HashMap<String, Object> prop = new HashMap<>();
-        prop.put("hibernate.dialect", "org.hibernate.dialect.MariaDBDialect");
+        prop.put("hibernate.dialect", "org.hibernate.dialect.H2Dialect");
         prop.put("hibernate.hbm2ddl.auto", "update");
         prop.put("hibernate.format_sql", true);
         em.setJpaPropertyMap(prop);
