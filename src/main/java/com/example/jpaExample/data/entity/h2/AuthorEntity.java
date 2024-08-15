@@ -19,6 +19,9 @@ public class AuthorEntity extends AuditingEntity implements Persistable<String> 
     @Column(name = "AUTHOR_NAME")
     private String authorName;
 
+    @OneToMany(mappedBy = "author", cascade = CascadeType.REMOVE)
+    private List<BookEntity> book;
+
     @Override
     public boolean isNew() {
         return super.getCreatedTime() == null; // (5)
