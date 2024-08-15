@@ -44,4 +44,11 @@ public class H2ServiceImpl implements H2Service {
         BookEntity bookEntity = bookRepository.save(book);
         return true;
     }
+
+    @Transactional
+    public void updateBookInfo() {
+        BookEntity book = bookRepository.findById("1").get();
+        book.setBookPrice(1000);
+
+    }
 }
