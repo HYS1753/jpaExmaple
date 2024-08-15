@@ -58,9 +58,6 @@
             <logger name="com.amazonaws.util" level="INFO" additivity="false" >
                 <AppenderRef ref="File"/>
             </logger>
-            <logger name="kyobobook" level="${LOG_LEVEL}" additivity="false">
-                <AppenderRef ref="File"/>
-            </logger>
             <logger name="org.mongodb.driver" level="INFO" additivity="false">
                 <AppenderRef ref="File"/>
             </logger>
@@ -107,10 +104,6 @@
                 <AppenderRef ref="File"/>
             </logger>
             <logger name="com.amazonaws.util" level="INFO" additivity="false" >
-                <AppenderRef ref="Console"/>
-                <AppenderRef ref="File"/>
-            </logger>
-            <logger name="kyobobook" level="${LOG_LEVEL}" additivity="false">
                 <AppenderRef ref="Console"/>
                 <AppenderRef ref="File"/>
             </logger>
@@ -167,10 +160,6 @@
                 <AppenderRef ref="File"/>
             </logger>
             <logger name="com.amazonaws.util" level="${LOG_LEVEL}" additivity="false" >
-                <appenderRef ref="Console"/>
-                <AppenderRef ref="File"/>
-            </logger>
-            <logger name="kyobobook" level="${LOG_LEVEL}" additivity="false" >
                 <appenderRef ref="Console"/>
                 <AppenderRef ref="File"/>
             </logger>

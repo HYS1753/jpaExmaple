@@ -1,14 +1,4 @@
 package com.example.jpaExample.config;
-/****************************************************************************************
- * Copyright(c) 2021-2023 Kyobo Book Centre All right reserved.
- * This software is the proprietary information of Kyobo Book.
- *
- * Revision History
- * Author                         Date          Description
- * --------------------------     ----------    ----------------------------------------
- * hys1753@kyobobook.co.kr        2024-03-07
- *
- ****************************************************************************************/
 
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -26,13 +16,7 @@ import org.springframework.transaction.PlatformTransactionManager;
 import javax.sql.DataSource;
 import java.util.HashMap;
 
-/**
- * @author : hys1753@kyobobook.co.kr
- * @Project : jpaExample
- * @FileName : PgDbConfig
- * @Date : 2024-03-07
- * @description :
- */
+
 @Configuration
 @EnableJpaRepositories(
         basePackages = {"com.example.jpaExample.data.repository.pg"},

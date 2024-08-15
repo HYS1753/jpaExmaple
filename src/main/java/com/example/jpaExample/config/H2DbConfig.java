@@ -1,14 +1,4 @@
 package com.example.jpaExample.config;
-/****************************************************************************************
- * Copyright(c) 2021-2023 Kyobo Book Centre All right reserved.
- * This software is the proprietary information of Kyobo Book.
- *
- * Revision History
- * Author                         Date          Description
- * --------------------------     ----------    ----------------------------------------
- * hys1753@kyobobook.co.kr        2024-03-04
- *
- ****************************************************************************************/
 
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -26,13 +16,6 @@ import org.springframework.transaction.PlatformTransactionManager;
 import javax.sql.DataSource;
 import java.util.HashMap;
 
-/**
- * @author : hys1753@kyobobook.co.kr
- * @Project : jpaExample
- * @FileName : H2DbConfig
- * @Date : 2024-03-04
- * @description :
- */
 @Configuration
 @EnableJpaRepositories(
         basePackages = {"com.example.jpaExample.data.repository.h2"},
@@ -64,6 +47,14 @@ public class H2DbConfig {
 
         HashMap<String, Object> prop = new HashMap<>();
         prop.put("hibernate.dialect", "org.hibernate.dialect.H2Dialect");
+        /*
+        hibernate.hbm2ddl.auto option
+        - create : 기존 테이블 삭제 후 다시 생성 ( DRRP + CREATE)
+        - create-drop : create 와 같으나 종료시점에 테이블 DROP
+        - update : 변경분만 반영(운영DB 에는 사용하면 안됨)
+        - validate : 엔티티와 테이블이 정상 매핑 되었는지만 확인
+        - none :  사용하지 않음.
+         */
         prop.put("hibernate.hbm2ddl.auto", "update");
         prop.put("hibernate.format_sql", true);
         em.setJpaPropertyMap(prop);

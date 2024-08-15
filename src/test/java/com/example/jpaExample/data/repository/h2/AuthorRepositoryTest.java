@@ -12,24 +12,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-/****************************************************************************************
- * Copyright(c) 2021-2023 Kyobo Book Centre All right reserved.
- * This software is the proprietary information of Kyobo Book.
- *
- * Revision History
- * Author                         Date          Description
- * --------------------------     ----------    ----------------------------------------
- * hys1753@kyobobook.co.kr        2024-03-06
- *
- ****************************************************************************************/
-
-/**
- * @author : hys1753@kyobobook.co.kr
- * @Project : jpaExample
- * @FileName : AuthorRepositoryTest
- * @Date : 2024-03-06
- * @description :
- */
 @Slf4j
 @DataJpaTest        // @Transaction을 포함하고 있어 1개의 테스트가 끝나면 Rollback 해 다른 테스트에 영향을 미치지 않음 (DataSource 설정 확인, CRUD 확인)
 //@RequiredArgsConstructor  --> Test code 에서는 생성자 DI 하면 안됨 이유는 하단 주석 확인.

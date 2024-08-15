@@ -1,14 +1,4 @@
 package com.example.jpaExample.data.entity.h2;
-/****************************************************************************************
- * Copyright(c) 2021-2023 Kyobo Book Centre All right reserved.
- * This software is the proprietary information of Kyobo Book.
- *
- * Revision History
- * Author                         Date          Description
- * --------------------------     ----------    ----------------------------------------
- * hys1753@kyobobook.co.kr        2024-03-05
- *
- ****************************************************************************************/
 
 import jakarta.persistence.Column;
 import jakarta.persistence.EntityListeners;
@@ -22,13 +12,6 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
 
-/**
- * @author : hys1753@kyobobook.co.kr
- * @Project : jpaExample
- * @FileName : AuditingPgEntity
- * @Date : 2024-03-05
- * @description :
- */
 
 // 사전에 Application.java 에 @EnableJpaAuditing을 추가해야 한다. (따로 컨피그로 뺴서 다중 DB 사용시 해당 config 에 작성.)
 @EntityListeners(AuditingEntityListener.class) // 이벤트가 발생할 때 호출해 줄 Listener 클래스

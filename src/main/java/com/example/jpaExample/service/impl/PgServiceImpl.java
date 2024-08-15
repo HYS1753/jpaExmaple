@@ -1,14 +1,4 @@
 package com.example.jpaExample.service.impl;
-/****************************************************************************************
- * Copyright(c) 2021-2023 Kyobo Book Centre All right reserved.
- * This software is the proprietary information of Kyobo Book.
- *
- * Revision History
- * Author                         Date          Description
- * --------------------------     ----------    ----------------------------------------
- * hys1753@kyobobook.co.kr        2024-03-07
- *
- ****************************************************************************************/
 
 import com.example.jpaExample.data.dto.SetAuthorInfoReqDto;
 import com.example.jpaExample.data.dto.SetBookInfoReqDto;
@@ -19,13 +9,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-/**
- * @author : hys1753@kyobobook.co.kr
- * @Project : jpaExample
- * @FileName : PgServiceImpl
- * @Date : 2024-03-07
- * @description :
- */
+
 @Slf4j
 @Service
 @RequiredArgsConstructor

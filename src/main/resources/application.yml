@@ -12,8 +12,8 @@ spring:
     password:
   pg-datasource:
     jdbc-url: jdbc:postgresql://localhost:5432/test
-    username: username
-    password: password
+    username: test
+    password: test
   h2:
     console:
       enabled: true
